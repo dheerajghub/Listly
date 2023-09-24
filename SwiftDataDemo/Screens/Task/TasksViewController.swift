@@ -27,18 +27,17 @@ class TasksViewController: UIViewController {
         let inputView = FormTextWithTitleView()
         inputView.translatesAutoresizingMaskIntoConstraints = false
         
-        inputView.formTitleLabel.text = "Tasks Name"
+        inputView.formTitleLabel.text = "Task Name"
         inputView.formTextView.customTextLabel.isHidden = true
         inputView.formTextView.copyButton.isHidden = true
         inputView.formTextView.inputTextField.isHidden = false
         inputView.formTextView.inputTextField.attributedPlaceholder = NSAttributedString(
-            string: "Enter Task",
+            string: "Enter title",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.lightGray.withAlphaComponent(0.7),
                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .regular)
             ]
         )
-        
         
         return inputView
     }()
@@ -46,11 +45,12 @@ class TasksViewController: UIViewController {
     lazy var actionButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .blue
+        button.backgroundColor = .black
         button.layer.cornerRadius = 5
-        button.setTitle("Add Task", for: .normal)
+        button.setTitle("Save Task", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+        button.layer.cornerCurve = .continuous
         button.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         button.tapFeedback()
         return button
@@ -80,7 +80,7 @@ class TasksViewController: UIViewController {
     // MARK: FUNCTIONS -
     
     func setUpViews(){
-        view.backgroundColor = UIColor.colorWithHex(color: "272727")
+        view.backgroundColor = .white
         view.addSubview(headerView)
         view.addSubview(taskInputView)
         view.addSubview(actionButton)

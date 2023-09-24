@@ -17,23 +17,24 @@ class HomeViewController: UIViewController {
         let view = CustomHeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        view.headerTitle.text = "Tasks"
+        view.headerTitle.text = "My Task"
         view.headerTitle.font = .systemFont(ofSize: 18, weight: .semibold)
         view.actionButton.setImage(UIImage(systemName: "plus"), for: .normal)
-        view.actionButton.imageView?.tintColor = .white
+        view.actionButton.imageView?.tintColor = .black
         view.actionButton.addTarget(self, action: #selector(addTask), for: .touchUpInside)
         
         
         return view
     }()
     
-//    lazy var taskTableView: UITableView = {
-//        let tableView = UITableView()
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        return tableView
-//    }()
+    lazy var taskTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        return tableView
+    }()
     
     // MARK: MAIN -
     
@@ -50,7 +51,7 @@ class HomeViewController: UIViewController {
     // MARK: FUNCTIONS -
     
     func setUpViews(){
-        view.backgroundColor = .black
+        view.backgroundColor = .white
         view.addSubview(headerView)
     }
     
