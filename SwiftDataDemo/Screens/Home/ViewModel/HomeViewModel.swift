@@ -10,7 +10,7 @@ import SwiftData
 
 class HomeViewModel {
     
-    var dataPersistenceService: DataPersistenceService?
+    private var dataPersistenceService: DataPersistenceService?
     var tasks: [HomeModel] = []
     
     init(){
@@ -20,7 +20,7 @@ class HomeViewModel {
     func createDataPersistenceServiceContainer() {
         
         let dataPersistenceService = DataPersistenceService.getInstance()
-        dataPersistenceService.createContainer(persistentModels: [HomeModel.self])
+        dataPersistenceService.createContainer(persistentModel: HomeModel.self)
         self.dataPersistenceService = dataPersistenceService
         
     }
@@ -42,16 +42,25 @@ class HomeViewModel {
         
         do {
             
-            let discriptor = FetchDescriptor<HomeModel>(sortBy: [SortDescriptor<HomeModel>(\.timestamp)])
-            let result = try await dataPersistenceService.fetchData(descriptor: discriptor)
-            
-            switch result {
-            case let .success(taskData):
-                guard let taskData else { return .failure(.unknown) }
-                self.tasks = taskData
-                return .success(true)
-            case let .failure(error):
-                return .failure(error)
+            if #available(iOS 17, *) {
+                let fetchDiscriptor = FetchDescriptor<HomeModel>(
+                    sortBy: [SortDescriptor<HomeModel>(\.timestamp, order: .reverse)]
+                )
+                
+                let result = try await dataPersistenceService.fetchData(descriptor: fetchDiscriptor)
+                
+                switch result {
+                case let .success(taskData):
+                    guard let taskData else { return .failure(.unknown) }
+                    self.tasks = taskData
+                    return .success(true)
+                case let .failure(error):
+                    return .failure(error)
+                }
+                
+            } else {
+                // Fallback on earlier versions
+                return .success(false)
             }
             
         } catch {
@@ -60,12 +69,17 @@ class HomeViewModel {
         
     }
     
-    func updateTasks(taskId: String) {
-        
+    func updateTask(task: HomeModel, taskStatus: Int) {
+        let taskToBeUpdated = task
+        taskToBeUpdated.taskStatus = taskStatus
     }
     
-    func deleteTasks(taskId: String) {
+    func deleteTask(task: HomeModel) {
+        guard let dataPersistenceService,
+              let context = dataPersistenceService.context
+        else { return }
         
+        context.delete(task)
     }
     
 }

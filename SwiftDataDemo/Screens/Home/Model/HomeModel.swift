@@ -10,7 +10,6 @@ import SwiftData
 
 enum TaskStatus: Int {
     case todo = 0
-    case doing
     case done
 }
 
@@ -24,8 +23,8 @@ class HomeModel {
     
     init(id: String = UUID().uuidString,
          taskName: String? = nil,
-         timestamp: Date? = nil,
-         taskStatus: Int? = nil
+         timestamp: Date? = Date(),
+         taskStatus: Int? = 0
     ) {
         self.id = id
         self.taskName = taskName

@@ -20,7 +20,7 @@ class DataPersistenceService {
     private static var sharedInstance: DataPersistenceService!
     
     private var container: ModelContainer?
-    private var context: ModelContext?
+    public var context: ModelContext?
     
     public static func getInstance() -> DataPersistenceService {
         if sharedInstance == nil {
@@ -29,9 +29,9 @@ class DataPersistenceService {
         return sharedInstance
     }
     
-    func createContainer(persistentModels: [any PersistentModel.Type]){
+    func createContainer(persistentModel: any PersistentModel.Type){
         do {
-            let container = try ModelContainer(for: persistentModels)
+            let container = try ModelContainer(for: persistentModel)
             self.container = container
             self.context = ModelContext(container)
         } catch {

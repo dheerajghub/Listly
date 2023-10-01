@@ -11,18 +11,13 @@ class TaskTableViewCell: UITableViewCell {
 
     // MARK: PROPERTIES -
     
-    
-    
-    override var isSelected: Bool {
+    var task: HomeModel? {
         didSet {
-            
-            let unselectedImage = UIImage(named: "ic_uncheck")?.withRenderingMode(.alwaysTemplate).withTintColor(.lightGray.withAlphaComponent(0.2))
-            let selectedImage = UIImage(named: "ic_check")?.withRenderingMode(.alwaysTemplate).withTintColor(.black)
-            
-            selectorImageView.image = isSelected ? selectedImage : unselectedImage
-            
+            manageCell()
         }
     }
+    
+    var taskLabelBottomConstraints: NSLayoutConstraint?
     
     let cardCoverView: UIView = {
         let view = UIView()
@@ -45,6 +40,16 @@ class TaskTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.textColor = .black
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    let timeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .lightGray
+        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.isHidden = true
         return label
     }()
     
@@ -63,30 +68,81 @@ class TaskTableViewCell: UITableViewCell {
     // MARK: FUNCTIONS -
     
     func setUpViews(){
+        backgroundColor = .clear
         addSubview(cardCoverView)
         cardCoverView.addSubview(selectorImageView)
         cardCoverView.addSubview(taskLabel)
+        cardCoverView.addSubview(timeLabel)
     }
     
     func setUpConstraints(){
         NSLayoutConstraint.activate([
             
-            cardCoverView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            cardCoverView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20),
-            cardCoverView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            cardCoverView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            cardCoverView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            cardCoverView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            cardCoverView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            cardCoverView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             
             selectorImageView.leadingAnchor.constraint(equalTo: cardCoverView.leadingAnchor, constant: 10),
             selectorImageView.topAnchor.constraint(equalTo: cardCoverView.topAnchor, constant: 10),
-            selectorImageView.widthAnchor.constraint(equalToConstant: 30),
-            selectorImageView.heightAnchor.constraint(equalToConstant: 30),
+            selectorImageView.widthAnchor.constraint(equalToConstant: 20),
+            selectorImageView.heightAnchor.constraint(equalToConstant: 20),
             
             taskLabel.leadingAnchor.constraint(equalTo: selectorImageView.trailingAnchor, constant: 10),
-            taskLabel.trailingAnchor.constraint(equalTo: cardCoverView.trailingAnchor, constant: 15),
-            taskLabel.bottomAnchor.constraint(equalTo: cardCoverView.bottomAnchor, constant: -10),
-            taskLabel.topAnchor.constraint(equalTo: cardCoverView.topAnchor, constant: 10)
+            taskLabel.trailingAnchor.constraint(equalTo: cardCoverView.trailingAnchor, constant: -15),
+            taskLabel.topAnchor.constraint(equalTo: cardCoverView.topAnchor, constant: 10),
+            
+            timeLabel.leadingAnchor.constraint(equalTo: selectorImageView.trailingAnchor, constant: 10),
+            timeLabel.bottomAnchor.constraint(equalTo: cardCoverView.bottomAnchor, constant: -10),
+            timeLabel.trailingAnchor.constraint(equalTo: cardCoverView.trailingAnchor, constant: -20)
             
         ])
+        
+        taskLabelBottomConstraints = taskLabel.bottomAnchor.constraint(equalTo: cardCoverView.bottomAnchor, constant: -35)
+        taskLabelBottomConstraints?.isActive = true
+    }
+    
+    func manageCell(){
+        
+        guard let task else { return }
+        
+        // 0 is for todo tasks
+        let taskStatus = TaskStatus(rawValue: task.taskStatus ?? 0)
+//        taskLabel.text = task.taskName
+        
+        // formatted date string
+        let timestamp = task.timestamp
+        let dayDifference = timestamp?.dayDifference() ?? "" // Yesterday, Today, Tomorrow
+        let time = timestamp?.toString(format: "hh.mm a") ?? ""
+        timeLabel.text = dayDifference + " " + time
+        
+        // selection UI
+        let taskSelected = (taskStatus == .todo) ? false : true
+        manageSelection(isSelected: taskSelected)
+    
+        taskLabelBottomConstraints?.constant = -12
+    }
+    
+    func manageSelection(isSelected: Bool) {
+        
+        guard let task else { return }
+        
+        let taskTitle = task.taskName ?? ""
+        
+        let unselectedImage = UIImage(named: "ic_uncheck")?.withRenderingMode(.alwaysTemplate)
+        let selectedImage = UIImage(named: "ic_check")?.withRenderingMode(.alwaysTemplate)
+        
+        let selectedColor = UIColor.black
+        let unselectedColor = UIColor.lightGray.withAlphaComponent(0.2)
+        
+        let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: "\(taskTitle)")
+        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: isSelected ? 1 : 0, range: NSRange(location: 0, length: attributeString.length))
+        
+        selectorImageView.image = isSelected ? selectedImage : unselectedImage
+        selectorImageView.tintColor = isSelected ? selectedColor : unselectedColor
+        taskLabel.textColor = isSelected ? .darkGray.withAlphaComponent(0.7) : .black
+        taskLabel.attributedText = attributeString
+        
     }
 
 }

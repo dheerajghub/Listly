@@ -15,7 +15,8 @@ class CustomHeaderView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ""
-        label.textColor = .white
+        label.textColor = .black
+        label.textAlignment = .center
         return label
     }()
     
@@ -67,8 +68,8 @@ class CustomHeaderView: UIView {
     
     func setupConstraints(){
         NSLayoutConstraint.activate([
-            headerTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             headerTitle.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            headerTitle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
             actionStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             actionStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
