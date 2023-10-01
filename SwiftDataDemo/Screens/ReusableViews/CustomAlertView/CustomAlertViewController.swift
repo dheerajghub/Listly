@@ -16,6 +16,8 @@ class CustomAlertViewController: UIViewController {
 
     // MARK: PROPERTIES -
     var alertType: CustomAlertType?
+    var message: String = ""
+    var actionCallback: ((Bool) -> Void)?
     
     let backCoverView: UIView = {
         let view = UIView()
@@ -26,7 +28,15 @@ class CustomAlertViewController: UIViewController {
     
     // MARK: - Action sheet
     
-    
+    lazy var actionSheetView: CustomActionSheetView = {
+        let view = CustomActionSheetView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        view.actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+        
+        return view
+    }()
     
     //:
     
@@ -38,9 +48,11 @@ class CustomAlertViewController: UIViewController {
         setUpConstraints()
     }
     
-    init(alertType: CustomAlertType? = .default) {
+    init(alertType: CustomAlertType? = .default, message: String) {
         super.init(nibName: nil, bundle: nil)
         self.alertType = alertType
+        self.message = message
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -51,10 +63,32 @@ class CustomAlertViewController: UIViewController {
     
     func setUpViews(){
         view.addSubview(backCoverView)
+        view.addSubview(actionSheetView)
     }
     
     func setUpConstraints(){
         backCoverView.pin(to: view)
+        NSLayoutConstraint.activate([
+            actionSheetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            actionSheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            actionSheetView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            actionSheetView.heightAnchor.constraint(equalToConstant: 500)
+        ])
+    }
+    
+    func setupUI(){
+        actionSheetView.headerView.headerTitle.text = message
+    }
+    
+    // MARK: - ACTION
+    
+    @objc func actionButtonTapped(){
+        self.dismiss(animated: true)
+        actionCallback?(true)
+    }
+    
+    @objc func cancelButtonTapped(){
+        self.dismiss(animated: true)
     }
 
 }

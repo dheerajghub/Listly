@@ -16,7 +16,7 @@ class FormTextWithTitleView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Form Title Text"
         label.font = .systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .white
+        label.textColor = .black
         return label
     }()
     

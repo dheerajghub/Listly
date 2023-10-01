@@ -38,10 +38,10 @@ class FormTextView: UIView {
                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: .regular)
             ]
         )
-        textField.tintColor = .white
-        textField.font = .systemFont(ofSize: 12, weight: .regular)
+        textField.tintColor = .black
+        textField.font = .systemFont(ofSize: 14, weight: .regular)
         textField.isHidden = true
-        textField.textColor = .white
+        textField.textColor = .black
         return textField
     }()
     
