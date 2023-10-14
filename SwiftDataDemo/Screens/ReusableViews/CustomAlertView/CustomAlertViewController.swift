@@ -40,6 +40,20 @@ class CustomAlertViewController: UIViewController {
     
     //:
     
+    // MARK: - Alert Sheet
+    
+    lazy var alertSheetView: CustomAlertSheetView = {
+        let view = CustomAlertSheetView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        view.actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
+        
+        return view
+    }()
+    
+    //:
+    
     // MARK: MAIN -
     
     override func viewDidLoad() {
@@ -64,10 +78,12 @@ class CustomAlertViewController: UIViewController {
     func setUpViews(){
         view.addSubview(backCoverView)
         view.addSubview(actionSheetView)
+        view.addSubview(alertSheetView)
     }
     
     func setUpConstraints(){
         backCoverView.pin(to: view)
+        alertSheetView.pin(to: view)
         NSLayoutConstraint.activate([
             actionSheetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             actionSheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -77,7 +93,16 @@ class CustomAlertViewController: UIViewController {
     }
     
     func setupUI(){
-        actionSheetView.headerView.headerTitle.text = message
+        if alertType == .actionSheet {
+            actionSheetView.isHidden = false
+            alertSheetView.isHidden = true
+            actionSheetView.headerView.headerTitle.text = message
+        } else {
+            actionSheetView.isHidden = true
+            alertSheetView.isHidden = false
+            alertSheetView.messageLabel.text = message
+        }
+        
     }
     
     // MARK: - ACTION

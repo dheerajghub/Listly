@@ -60,6 +60,7 @@ class TasksViewController: UIViewController {
         textView.text = "e.g. My awesome task"
         textView.backgroundColor = .clear
         textView.autocapitalizationType = .none
+        textView.returnKeyType = .done
         
         return textView
     }()
@@ -69,12 +70,14 @@ class TasksViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .black
         button.layer.cornerRadius = 5
-        button.setTitle("Save Task", for: .normal)
+        button.setTitle("Save", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
         button.layer.cornerCurve = .continuous
         button.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         button.tapFeedback()
+        button.isEnabled = false
+        button.alpha = 0.3
         return button
     }()
     
@@ -101,6 +104,10 @@ class TasksViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification) , name: UIResponder.keyboardWillShowNotification , object: nil)
                 
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification) , name: UIResponder.keyboardWillHideNotification , object: nil)
+        
+        setUpDefaults()
+        
+        taskTextViewHeightConstraint?.priority = .fittingSizeLevel
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,7 +155,6 @@ class TasksViewController: UIViewController {
             taskTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -13),
             taskTextView.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -10),
             taskTextView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10),
-            taskTextView.heightAnchor.constraint(equalToConstant: 130),
             
             actionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
@@ -170,6 +176,22 @@ class TasksViewController: UIViewController {
         
     }
     
+    func setUpDefaults(){
+        
+        guard let homeViewModel,
+              let index = homeViewModel.editableTaskIndex
+        else { return }
+        
+        headerView.headerTitle.text = "Update Task"
+        
+        let task = homeViewModel.tasks[index].taskName
+        taskTextView.text = task
+        taskTextView.textColor = .black
+        self.textViewDidChange(self.taskTextView)
+        
+        
+    }
+    
     // MARK: ACTIONS -
     
     @objc func actionButtonTapped(){
@@ -181,17 +203,27 @@ class TasksViewController: UIViewController {
         
         let text = taskTextView.text ?? ""
         
-        if text == "" {
+        if text == "" || text == "e.g. My awesome task" || taskTextView.text.trimmingCharacters(in: .whitespaces).isEmpty {
             // show alert if needed
             return
         }
         
-        // add task
+        // update task
+        if homeViewModel.isEditing {
+            guard let index = homeViewModel.editableTaskIndex else { return }
+            let currentTask = homeViewModel.tasks[index]
+            currentTask.taskName = text
+            homeViewModel.updateTask(task: currentTask)
+        } else {
+            
+            // get total count of tasks
+            let totalTask = homeViewModel.tasks.count
+            let taskData = HomeModel(taskName: text, orderNum: totalTask + 1)
+            homeViewModel.saveTask(modelData: taskData)
+        }
         
-        let taskData = HomeModel(taskName: text)
-        homeViewModel.saveTask(modelData: taskData)
         
-        self.dismissController()
+        self.dismiss(animated: true)
         self.updateCallback?()
         
     }
@@ -214,7 +246,17 @@ class TasksViewController: UIViewController {
     }
     
     @objc func dismissController(){
-        self.dismiss(animated: true)
+        
+        if taskTextView.text != "" && taskTextView.text != "e.g. My awesome task" && !taskTextView.text.trimmingCharacters(in: .whitespaces).isEmpty {
+            Helper.showAlert(message: "Are you sure want to discard this task?", controller: self, alertType: .default) { success in
+                if success {
+                    self.dismiss(animated: true)
+                }
+            }
+        } else {
+            self.dismiss(animated: true)
+        }
+        
     }
 
 }
@@ -226,12 +268,27 @@ extension TasksViewController: UITextViewDelegate {
         let estimatedSize = textView.sizeThatFits(size)
         
         if estimatedSize.height < 50.0 {
-            taskTextViewHeightConstraint?.constant = 50
+            self.taskTextViewHeightConstraint?.constant = 50
         } else {
-            taskTextViewHeightConstraint?.constant = estimatedSize.height
+            self.taskTextViewHeightConstraint?.constant = estimatedSize.height
         }
         
-        print("ESTIMATED HEIGHT ::: \(estimatedSize.height)")
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+        
+        
+        if textView.text == "" || textView.text == "e.g. My awesome task" || taskTextView.text.trimmingCharacters(in: .whitespaces).isEmpty {
+            // show alert if needed
+            actionButton.isEnabled = false
+            actionButton.alpha = 0.3
+        } else {
+            actionButton.isEnabled = true
+            actionButton.alpha = 1
+        }
+        
+        print("ESTIMATED HEIGHT ::\(estimatedSize.height)")
+        
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -239,12 +296,19 @@ extension TasksViewController: UITextViewDelegate {
         // Combine the textView text and the replacement text to
         // create the updated text string
         let currentText:String = textView.text
+        
+        // dismiss the keyboard if newline character typed
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        
         let updatedText = (currentText as NSString).replacingCharacters(in: range, with: text)
-
+        
         // If updated text view will be empty, add the placeholder
         // and set the cursor to the beginning of the text view
+        
         if updatedText.isEmpty {
-
             textView.text = "e.g. My awesome task"
             textView.textColor = UIColor.lightGray
 
@@ -255,7 +319,7 @@ extension TasksViewController: UITextViewDelegate {
         // length of the replacement string is greater than 0, set
         // the text color to black then set its text to the
         // replacement string
-         else if textView.textColor == UIColor.lightGray && !text.isEmpty {
+        else if textView.textColor == UIColor.lightGray && !text.isEmpty {
             textView.textColor = UIColor.black
             textView.text = text
         }

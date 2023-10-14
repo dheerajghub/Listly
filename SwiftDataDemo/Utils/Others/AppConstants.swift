@@ -20,3 +20,10 @@ struct windowConstant {
     }
     
 }
+
+struct Colors {
+    
+    static let appRed = UIColor.colorWithHex(color: "#fe4848")
+    static let appBlue = UIColor.colorWithHex(color: "#5264FF")
+    
+}

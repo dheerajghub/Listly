@@ -20,15 +20,18 @@ class HomeModel {
     var taskName: String?
     var timestamp: Date?
     var taskStatus: Int?
+    var orderNum: Int?
     
     init(id: String = UUID().uuidString,
          taskName: String? = nil,
          timestamp: Date? = Date(),
-         taskStatus: Int? = 0
+         taskStatus: Int? = 0,
+         orderNum: Int? = 1
     ) {
         self.id = id
         self.taskName = taskName
         self.timestamp = timestamp
         self.taskStatus = taskStatus
+        self.orderNum = orderNum
     }
 }

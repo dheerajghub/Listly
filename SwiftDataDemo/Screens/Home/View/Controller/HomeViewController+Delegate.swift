@@ -41,33 +41,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        guard homeViewModel.tasks.count > 0 else { return nil }
-
-        let task = homeViewModel.tasks[indexPath.row]
-        let deleteContextItem = UIContextualAction(style: .destructive, title: "Delete") {  (contextualAction, view, boolValue) in
-            // Show alert before deleting
-            Helper.showAlert(message: "Are you sure want to delete this task?" , controller: self) { [weak self] response in
-                guard let self else { return }
-                if response {
-                    // delete the task
-                    self.homeViewModel.deleteTask(task: task)
-                    self.fetchData()
-                }
-            }
-        }
-        
-        let swipeActions = UISwipeActionsConfiguration(actions: [deleteContextItem])
-
-        return swipeActions
-    
-    }
-    
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell {
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
-                cell.cardCoverView.transform = .init(scaleX: 0.98, y: 0.98)
+                cell.customTaskView.cardCoverView.transform = .init(scaleX: 0.98, y: 0.98)
             }
         }
     }
@@ -75,9 +52,75 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell {
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
-                cell.cardCoverView.transform = .identity
+                cell.customTaskView.cardCoverView.transform = .identity
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let task = homeViewModel.tasks[indexPath.row]
+        
+        guard let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell else { return nil }
+        
+        return UIContextMenuConfiguration(
+            identifier: nil,
+            previewProvider: {
+                
+                let controller = TaskPreviewViewController()
+                controller.task = task
+                controller.customTaskView.forPreview = true
+                controller.preferredContentSize = CGSize(width: cell.customTaskView.frame.width, height: cell.customTaskView.frame.height)
+                return controller
+                
+            },
+            actionProvider: { _ in
+                
+                let editTask = UIAction(
+                    title: "Edit Task",
+                    image: UIImage(named: "ic_edit_orig"),
+                    identifier: nil
+                ) { _ in
+                    
+                    self.homeViewModel.isEditing = true
+                    self.homeViewModel.editableTaskIndex = indexPath.row
+                    
+                    let taskController = TasksViewController(homeViewModel: self.homeViewModel)
+                    taskController.modalPresentationStyle = .overCurrentContext
+                    taskController.modalTransitionStyle = .crossDissolve
+                    
+                    taskController.updateCallback = { [weak self] in
+                        guard let self else { return }
+                        self.fetchData()
+                    }
+                    
+                    self.present(taskController, animated: true)
+                }
+                
+                let removeTask = UIAction(
+                    title: "Delete task",
+                    image: UIImage(named: "ic_trash_orig"),
+                    identifier: nil,
+                    attributes: .destructive
+                ) { _ in
+                    
+                    // Show alert before deleting
+                    Helper.showAlert(message: "Are you sure want to delete this task?" , controller: self, alertType: .default) { [weak self] response in
+                        guard let self else { return }
+                        if response {
+                            // delete the task
+                            self.homeViewModel.deleteTask(task: task)
+                            self.fetchData()
+                        }
+                    }
+                    
+                }
+                
+                return UIMenu(
+                    title: "Task Actions",
+                    children: [editTask, removeTask]
+                )
+            })
     }
     
 }

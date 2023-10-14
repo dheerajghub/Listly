@@ -29,6 +29,7 @@ class HomeViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.dragDelegate = self
         tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "TaskTableViewCell")
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
@@ -141,6 +142,10 @@ class HomeViewController: UIViewController {
     
     @objc func addTask(){
         
+        
+        homeViewModel.isEditing = false
+        homeViewModel.editableTaskIndex = nil
+        
         let taskController = TasksViewController(homeViewModel: homeViewModel)
         taskController.modalPresentationStyle = .overCurrentContext
         taskController.modalTransitionStyle = .crossDissolve
@@ -148,6 +153,9 @@ class HomeViewController: UIViewController {
         taskController.updateCallback = { [weak self] in
             guard let self else { return }
             self.fetchData()
+            // scroll to very bottom
+            let index = IndexPath(row: homeViewModel.tasks.count - 1, section: 0)
+            self.taskTableView.scrollToRow(at: index, at: .bottom, animated: true)
         }
         
         self.present(taskController, animated: true)

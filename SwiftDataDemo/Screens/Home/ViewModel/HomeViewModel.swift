@@ -5,13 +5,16 @@
 //  Created by Dheeraj Kumar Sharma on 17/09/23.
 //
 
-import Foundation
+import UIKit
 import SwiftData
 
 class HomeViewModel {
     
     private var dataPersistenceService: DataPersistenceService?
     var tasks: [HomeModel] = []
+    
+    var isEditing: Bool = false
+    var editableTaskIndex: Int?
     
     init(){
         createDataPersistenceServiceContainer()
@@ -44,7 +47,7 @@ class HomeViewModel {
             
             if #available(iOS 17, *) {
                 let fetchDiscriptor = FetchDescriptor<HomeModel>(
-                    sortBy: [SortDescriptor<HomeModel>(\.timestamp, order: .reverse)]
+                    sortBy: [SortDescriptor<HomeModel>(\.orderNum, order: .forward)]
                 )
                 
                 let result = try await dataPersistenceService.fetchData(descriptor: fetchDiscriptor)
@@ -69,7 +72,7 @@ class HomeViewModel {
         
     }
     
-    func updateTask(task: HomeModel, taskStatus: Int) {
+    func updateTask(task: HomeModel, taskStatus: Int = 0) {
         let taskToBeUpdated = task
         taskToBeUpdated.taskStatus = taskStatus
     }

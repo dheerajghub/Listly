@@ -21,6 +21,6 @@ extension Date {
         if calendar.isDateInYesterday(self) { return "Yesterday" }
         else if calendar.isDateInToday(self) { return "Today" }
         else if calendar.isDateInTomorrow(self) { return "Tomorrow" }
-        else { return "" }
+        else { return toString(format: "dd MMM") + "," }
     }
 }

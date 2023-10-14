@@ -1,13 +1,13 @@
 //
-//  TaskTableViewCell.swift
+//  TaskPreviewViewController.swift
 //  SwiftDataDemo
 //
-//  Created by Dheeraj Kumar Sharma on 23/09/23.
+//  Created by Dheeraj Kumar Sharma on 01/10/23.
 //
 
 import UIKit
 
-class TaskTableViewCell: UITableViewCell {
+class TaskPreviewViewController: UIViewController {
 
     // MARK: PROPERTIES -
     
@@ -25,26 +25,21 @@ class TaskTableViewCell: UITableViewCell {
     
     // MARK: MAIN -
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setUpViews()
         setUpConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: FUNCTIONS -
     
     func setUpViews(){
-        contentView.backgroundColor = .white
-        backgroundColor = .clear
-        addSubview(customTaskView)
+        view.backgroundColor = .clear
+        view.addSubview(customTaskView)
     }
     
     func setUpConstraints(){
-        customTaskView.pin(to: self)
+        customTaskView.pin(to: view)
     }
     
     func manageCell(){
