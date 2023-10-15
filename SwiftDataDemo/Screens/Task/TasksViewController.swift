@@ -11,7 +11,7 @@ class TasksViewController: UIViewController {
 
     // MARK: PROPERTIES -
     
-    var homeViewModel: HomeViewModel?
+    var homeViewModel: TaskViewModel?
     var updateCallback: (() -> Void)?
     var bottomConstraint: NSLayoutConstraint?
     var taskTextViewHeightConstraint: NSLayoutConstraint?
@@ -37,7 +37,6 @@ class TasksViewController: UIViewController {
     let headerView: CustomHeaderView = {
         let view = CustomHeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.actionStackView.isHidden = true
         view.headerTitle.text = "Add Task"
         view.backgroundColor = .white
         view.headerTitle.font = .systemFont(ofSize: 15, weight: .semibold)
@@ -69,13 +68,13 @@ class TasksViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .black
-        button.layer.cornerRadius = 5
-        button.setTitle("Save", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+        button.layer.cornerRadius = 17.5
+        button.setImage(UIImage(named: "ic_arrow_up")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.imageView?.tintColor = .white
         button.layer.cornerCurve = .continuous
         button.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         button.tapFeedback()
+        button.dropShadow()
         button.isEnabled = false
         button.alpha = 0.3
         return button
@@ -83,7 +82,7 @@ class TasksViewController: UIViewController {
     
     // MARK: - INITIALIZER
     
-    init(homeViewModel: HomeViewModel) {
+    init(homeViewModel: TaskViewModel) {
         super.init(nibName: nil, bundle: nil)
         self.homeViewModel = homeViewModel
     }
@@ -156,10 +155,10 @@ class TasksViewController: UIViewController {
             taskTextView.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -10),
             taskTextView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10),
             
-            actionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            actionButton.heightAnchor.constraint(equalToConstant: 50),
+            actionButton.heightAnchor.constraint(equalToConstant: 35),
+            actionButton.widthAnchor.constraint(equalToConstant: 35),
             
             contentCoverView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             contentCoverView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -218,7 +217,14 @@ class TasksViewController: UIViewController {
             
             // get total count of tasks
             let totalTask = homeViewModel.tasks.count
-            let taskData = HomeModel(taskName: text, orderNum: totalTask + 1)
+            
+            // last task orderNum + 1
+            var lastTaskOrderNum = 0
+            if totalTask > 1 {
+                lastTaskOrderNum =  homeViewModel.tasks[totalTask - 1].orderNum ?? 0
+            }
+            
+            let taskData = TaskModel(taskName: text, orderNum: lastTaskOrderNum + 1)
             homeViewModel.saveTask(modelData: taskData)
         }
         

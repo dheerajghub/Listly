@@ -12,13 +12,21 @@
 		4436FBF22AC063CC00A34AD7 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4436FBF12AC063CC00A34AD7 /* CustomAlertViewController.swift */; };
 		4436FBF52AC066CA00A34AD7 /* CustomActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4436FBF42AC066CA00A34AD7 /* CustomActionSheetView.swift */; };
 		4436FBF72AC0750F00A34AD7 /* CustomDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4436FBF62AC0750F00A34AD7 /* CustomDefaultView.swift */; };
+		443D361F2ADA8DBD00116378 /* ArchivedTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D361E2ADA8DBD00116378 /* ArchivedTaskViewController.swift */; };
+		443D36212ADAB16400116378 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D36202ADAB16300116378 /* TaskView.swift */; };
+		443D36252ADAB35500116378 /* ArchiveTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D36242ADAB35500116378 /* ArchiveTaskView.swift */; };
+		443D36272ADAB36F00116378 /* ArchivedTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D36262ADAB36F00116378 /* ArchivedTaskTableViewCell.swift */; };
+		443D36292ADAB41900116378 /* ArchiveTaskViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D36282ADAB41900116378 /* ArchiveTaskViewController+Delegate.swift */; };
+		443D362B2ADAD33A00116378 /* ArchiveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D362A2ADAD33A00116378 /* ArchiveViewModel.swift */; };
+		44501CDE2ADBA490000EB079 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44501CDD2ADBA490000EB079 /* Array+Extension.swift */; };
+		44501CE02ADBEB60000EB079 /* CustomBottomArchiveActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44501CDF2ADBEB60000EB079 /* CustomBottomArchiveActionView.swift */; };
 		4463D84C2AB5DC45006B0D93 /* DataPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D84B2AB5DC45006B0D93 /* DataPersistenceService.swift */; };
 		4463D8732AB75996006B0D93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D86E2AB75996006B0D93 /* AppDelegate.swift */; };
 		4463D8752AB75996006B0D93 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D8702AB75996006B0D93 /* SceneDelegate.swift */; };
 		4463D8762AB75996006B0D93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4463D8712AB75996006B0D93 /* Assets.xcassets */; };
 		4463D8792AB759AC006B0D93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4463D8772AB759AC006B0D93 /* LaunchScreen.storyboard */; };
-		4463D8852AB75C81006B0D93 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D8842AB75C81006B0D93 /* HomeViewModel.swift */; };
-		4463D8872AB75C8B006B0D93 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D8862AB75C8B006B0D93 /* HomeModel.swift */; };
+		4463D8852AB75C81006B0D93 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D8842AB75C81006B0D93 /* TaskViewModel.swift */; };
+		4463D8872AB75C8B006B0D93 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D8862AB75C8B006B0D93 /* TaskModel.swift */; };
 		4463D8892AB75C99006B0D93 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D8882AB75C99006B0D93 /* HomeViewController.swift */; };
 		4463D88C2AB766D2006B0D93 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D88B2AB766D2006B0D93 /* CustomHeaderView.swift */; };
 		4463D88F2AB76887006B0D93 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D88E2AB76887006B0D93 /* TasksViewController.swift */; };
@@ -36,7 +44,6 @@
 		44F304FC2AC904CB00B38CB0 /* CustomAlertSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F304FB2AC904CB00B38CB0 /* CustomAlertSheetView.swift */; };
 		44F305022AC9466500B38CB0 /* TaskPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F305012AC9466500B38CB0 /* TaskPreviewViewController.swift */; };
 		44F305042ACA4ED000B38CB0 /* HomeViewController+DragDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F305032ACA4ED000B38CB0 /* HomeViewController+DragDelegate.swift */; };
-		44F305062ACA60A400B38CB0 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F305052ACA60A300B38CB0 /* TaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +52,14 @@
 		4436FBF12AC063CC00A34AD7 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		4436FBF42AC066CA00A34AD7 /* CustomActionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetView.swift; sourceTree = "<group>"; };
 		4436FBF62AC0750F00A34AD7 /* CustomDefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDefaultView.swift; sourceTree = "<group>"; };
+		443D361E2ADA8DBD00116378 /* ArchivedTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedTaskViewController.swift; sourceTree = "<group>"; };
+		443D36202ADAB16300116378 /* TaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
+		443D36242ADAB35500116378 /* ArchiveTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveTaskView.swift; sourceTree = "<group>"; };
+		443D36262ADAB36F00116378 /* ArchivedTaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedTaskTableViewCell.swift; sourceTree = "<group>"; };
+		443D36282ADAB41900116378 /* ArchiveTaskViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArchiveTaskViewController+Delegate.swift"; sourceTree = "<group>"; };
+		443D362A2ADAD33A00116378 /* ArchiveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveViewModel.swift; sourceTree = "<group>"; };
+		44501CDD2ADBA490000EB079 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		44501CDF2ADBEB60000EB079 /* CustomBottomArchiveActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBottomArchiveActionView.swift; sourceTree = "<group>"; };
 		4463D8312AB5DA7C006B0D93 /* SwiftDataDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDataDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4463D84B2AB5DC45006B0D93 /* DataPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceService.swift; sourceTree = "<group>"; };
 		4463D86E2AB75996006B0D93 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -52,8 +67,8 @@
 		4463D8702AB75996006B0D93 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4463D8712AB75996006B0D93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4463D8782AB759AC006B0D93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		4463D8842AB75C81006B0D93 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		4463D8862AB75C8B006B0D93 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		4463D8842AB75C81006B0D93 /* TaskViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		4463D8862AB75C8B006B0D93 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		4463D8882AB75C99006B0D93 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4463D88B2AB766D2006B0D93 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		4463D88E2AB76887006B0D93 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +86,6 @@
 		44F304FB2AC904CB00B38CB0 /* CustomAlertSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertSheetView.swift; sourceTree = "<group>"; };
 		44F305012AC9466500B38CB0 /* TaskPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPreviewViewController.swift; sourceTree = "<group>"; };
 		44F305032ACA4ED000B38CB0 /* HomeViewController+DragDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+DragDelegate.swift"; sourceTree = "<group>"; };
-		44F305052ACA60A300B38CB0 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +107,35 @@
 				44F304FB2AC904CB00B38CB0 /* CustomAlertSheetView.swift */,
 			);
 			path = CustomAlertView;
+			sourceTree = "<group>";
+		};
+		443D361D2ADA8CD800116378 /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				443D36232ADAB33B00116378 /* View */,
+				443D36222ADAB33500116378 /* Controller */,
+				443D362A2ADAD33A00116378 /* ArchiveViewModel.swift */,
+			);
+			path = Archive;
+			sourceTree = "<group>";
+		};
+		443D36222ADAB33500116378 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				443D361E2ADA8DBD00116378 /* ArchivedTaskViewController.swift */,
+				443D36282ADAB41900116378 /* ArchiveTaskViewController+Delegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		443D36232ADAB33B00116378 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				443D36242ADAB35500116378 /* ArchiveTaskView.swift */,
+				443D36262ADAB36F00116378 /* ArchivedTaskTableViewCell.swift */,
+				44501CDF2ADBEB60000EB079 /* CustomBottomArchiveActionView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		4463D8282AB5DA7C006B0D93 = {
@@ -145,6 +188,7 @@
 		4463D87A2AB75B1A006B0D93 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				443D361D2ADA8CD800116378 /* Archive */,
 				4463D8A42ABECEED006B0D93 /* Task */,
 				4463D88A2AB76677006B0D93 /* ReusableViews */,
 				4463D87B2AB75B2D006B0D93 /* Home */,
@@ -212,6 +256,7 @@
 				4463D8AA2ABFDD69006B0D93 /* Date+Extension.swift */,
 				4436FBED2AC006C400A34AD7 /* UIViewController+Extension.swift */,
 				44F304F72AC7C04800B38CB0 /* UIApplication+Extension.swift */,
+				44501CDD2ADBA490000EB079 /* Array+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -219,7 +264,7 @@
 		4463D89F2ABEBFE2006B0D93 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				44F305052ACA60A300B38CB0 /* TaskView.swift */,
+				443D36202ADAB16300116378 /* TaskView.swift */,
 				4463D8A02ABEBFFC006B0D93 /* TaskTableViewCell.swift */,
 				4463D88D2AB7686C006B0D93 /* Controller */,
 			);
@@ -229,7 +274,7 @@
 		4463D8A22ABECE49006B0D93 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				4463D8842AB75C81006B0D93 /* HomeViewModel.swift */,
+				4463D8842AB75C81006B0D93 /* TaskViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -237,7 +282,7 @@
 		4463D8A32ABECEC7006B0D93 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4463D8862AB75C8B006B0D93 /* HomeModel.swift */,
+				4463D8862AB75C8B006B0D93 /* TaskModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -329,6 +374,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				443D362B2ADAD33A00116378 /* ArchiveViewModel.swift in Sources */,
+				443D36272ADAB36F00116378 /* ArchivedTaskTableViewCell.swift in Sources */,
 				4463D8732AB75996006B0D93 /* AppDelegate.swift in Sources */,
 				4463D8A92ABEDA0C006B0D93 /* AppConstants.swift in Sources */,
 				4463D8922AB76933006B0D93 /* FormTextView.swift in Sources */,
@@ -336,25 +383,30 @@
 				4463D89E2AB773A6006B0D93 /* UIButton+Extension.swift in Sources */,
 				4436FBF22AC063CC00A34AD7 /* CustomAlertViewController.swift in Sources */,
 				4463D8982AB76A69006B0D93 /* FormSimpleTextView.swift in Sources */,
+				44501CDE2ADBA490000EB079 /* Array+Extension.swift in Sources */,
 				4463D89A2AB76C3E006B0D93 /* FormTextWithTitleView.swift in Sources */,
 				4436FBF02AC0636800A34AD7 /* Helper.swift in Sources */,
+				443D361F2ADA8DBD00116378 /* ArchivedTaskViewController.swift in Sources */,
 				44F305042ACA4ED000B38CB0 /* HomeViewController+DragDelegate.swift in Sources */,
 				4463D88C2AB766D2006B0D93 /* CustomHeaderView.swift in Sources */,
 				44F304F82AC7C04800B38CB0 /* UIApplication+Extension.swift in Sources */,
 				4436FBEE2AC006C400A34AD7 /* UIViewController+Extension.swift in Sources */,
 				4463D88F2AB76887006B0D93 /* TasksViewController.swift in Sources */,
-				4463D8872AB75C8B006B0D93 /* HomeModel.swift in Sources */,
-				44F305062ACA60A400B38CB0 /* TaskView.swift in Sources */,
+				4463D8872AB75C8B006B0D93 /* TaskModel.swift in Sources */,
 				4436FBF52AC066CA00A34AD7 /* CustomActionSheetView.swift in Sources */,
 				4463D8752AB75996006B0D93 /* SceneDelegate.swift in Sources */,
-				4463D8852AB75C81006B0D93 /* HomeViewModel.swift in Sources */,
+				443D36252ADAB35500116378 /* ArchiveTaskView.swift in Sources */,
+				4463D8852AB75C81006B0D93 /* TaskViewModel.swift in Sources */,
 				4463D8892AB75C99006B0D93 /* HomeViewController.swift in Sources */,
 				4463D89C2AB77041006B0D93 /* UIColor+Extension.swift in Sources */,
+				443D36212ADAB16400116378 /* TaskView.swift in Sources */,
 				4463D8962AB76A10006B0D93 /* UIView+Extension.swift in Sources */,
 				4436FBF72AC0750F00A34AD7 /* CustomDefaultView.swift in Sources */,
 				4463D8A62ABECF24006B0D93 /* HomeViewController+Delegate.swift in Sources */,
 				44F305022AC9466500B38CB0 /* TaskPreviewViewController.swift in Sources */,
 				4463D84C2AB5DC45006B0D93 /* DataPersistenceService.swift in Sources */,
+				443D36292ADAB41900116378 /* ArchiveTaskViewController+Delegate.swift in Sources */,
+				44501CE02ADBEB60000EB079 /* CustomBottomArchiveActionView.swift in Sources */,
 				4463D8AB2ABFDD69006B0D93 /* Date+Extension.swift in Sources */,
 				44F304FC2AC904CB00B38CB0 /* CustomAlertSheetView.swift in Sources */,
 			);

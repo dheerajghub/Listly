@@ -22,7 +22,6 @@ class CustomActionSheetView: UIView {
     let headerView: CustomHeaderView = {
         let view = CustomHeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.actionButton.isHidden = true
         view.headerTitle.text = "Message"
         view.headerTitle.font = .systemFont(ofSize: 12, weight: .medium)
         view.headerTitle.textColor = .lightGray

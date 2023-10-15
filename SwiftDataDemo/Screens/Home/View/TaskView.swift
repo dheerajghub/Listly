@@ -18,7 +18,7 @@ class TaskView: UIView {
         }
     }
     
-    var task: HomeModel? {
+    var task: TaskModel? {
         didSet {
             manageCell()
         }

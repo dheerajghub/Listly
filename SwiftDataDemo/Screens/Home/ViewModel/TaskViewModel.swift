@@ -1,5 +1,5 @@
 //
-//  HomeViewModel.swift
+//  TaskViewModel.swift
 //  SwiftDataDemo
 //
 //  Created by Dheeraj Kumar Sharma on 17/09/23.
@@ -8,10 +8,10 @@
 import UIKit
 import SwiftData
 
-class HomeViewModel {
+class TaskViewModel {
     
     private var dataPersistenceService: DataPersistenceService?
-    var tasks: [HomeModel] = []
+    var tasks: [TaskModel] = []
     
     var isEditing: Bool = false
     var editableTaskIndex: Int?
@@ -23,12 +23,12 @@ class HomeViewModel {
     func createDataPersistenceServiceContainer() {
         
         let dataPersistenceService = DataPersistenceService.getInstance()
-        dataPersistenceService.createContainer(persistentModel: HomeModel.self)
+        dataPersistenceService.createContainer(persistentModel: TaskModel.self)
         self.dataPersistenceService = dataPersistenceService
         
     }
     
-    func saveTask(modelData: HomeModel?){
+    func saveTask(modelData: TaskModel?){
         
         guard let dataPersistenceService,
               let modelData
@@ -38,7 +38,7 @@ class HomeViewModel {
         
     }
     
-    func getTasks() async throws -> Result<Bool?, DataPersistenceServiceError> {
+    func getTasks(isArchived: Bool = false) async throws -> Result<Bool?, DataPersistenceServiceError> {
         
         guard let dataPersistenceService
         else { return .failure(.unknown) }
@@ -46,8 +46,9 @@ class HomeViewModel {
         do {
             
             if #available(iOS 17, *) {
-                let fetchDiscriptor = FetchDescriptor<HomeModel>(
-                    sortBy: [SortDescriptor<HomeModel>(\.orderNum, order: .forward)]
+                let fetchDiscriptor = FetchDescriptor<TaskModel>(
+                    predicate: #Predicate<TaskModel> { $0.isArchived == isArchived },
+                    sortBy: [SortDescriptor<TaskModel>(\.orderNum, order: .forward)]
                 )
                 
                 let result = try await dataPersistenceService.fetchData(descriptor: fetchDiscriptor)
@@ -72,12 +73,52 @@ class HomeViewModel {
         
     }
     
-    func updateTask(task: HomeModel, taskStatus: Int = 0) {
+    func updateTask(
+        task: TaskModel,
+        taskStatus: Int? = nil,
+        isArchived: Bool? = nil,
+        isSelectedForEditing: Bool? = nil
+    ) {
         let taskToBeUpdated = task
-        taskToBeUpdated.taskStatus = taskStatus
+        
+        /// update only if not nil
+        
+        if let taskStatus {
+            taskToBeUpdated.taskStatus = taskStatus
+        }
+       
+        if let isArchived {
+            taskToBeUpdated.isArchived = isArchived
+        }
+        
+        if let isSelectedForEditing {
+            taskToBeUpdated.isSelectedForEditing = isSelectedForEditing
+        }
+        
     }
     
-    func deleteTask(task: HomeModel) {
+    // for bulk updates
+    func updateTasks(
+        tasks: [TaskModel],
+        isSelectedForEditing: Bool? = nil,
+        isArchived: Bool? = nil
+    ) {
+        
+        for task in tasks {
+            
+            if let isSelectedForEditing {
+                task.isSelectedForEditing = isSelectedForEditing
+            }
+            
+            if let isArchived {
+                task.isArchived = isArchived
+            }
+            
+        }
+        
+    }
+    
+    func deleteTask(task: TaskModel) {
         guard let dataPersistenceService,
               let context = dataPersistenceService.context
         else { return }

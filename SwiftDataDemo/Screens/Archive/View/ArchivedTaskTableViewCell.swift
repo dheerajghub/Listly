@@ -1,24 +1,30 @@
 //
-//  TaskTableViewCell.swift
+//  ArchivedTaskTableViewCell.swift
 //  SwiftDataDemo
 //
-//  Created by Dheeraj Kumar Sharma on 23/09/23.
+//  Created by Dheeraj Kumar Sharma on 14/10/23.
 //
 
 import UIKit
 
-class TaskTableViewCell: UITableViewCell {
+class ArchivedTaskTableViewCell: UITableViewCell {
 
     // MARK: PROPERTIES -
     
     var task: TaskModel? {
         didSet {
-            manageCell()
+            archiveView.task = task
         }
     }
     
-    let customTaskView: TaskView = {
-        let view = TaskView()
+    var forEdit: Bool = false {
+        didSet {
+            archiveView.forEdit = forEdit
+        }
+    }
+    
+    let archiveView: ArchiveTaskView = {
+        let view = ArchiveTaskView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -38,18 +44,12 @@ class TaskTableViewCell: UITableViewCell {
     // MARK: FUNCTIONS -
     
     func setUpViews(){
-        contentView.backgroundColor = .white
         backgroundColor = .clear
-        addSubview(customTaskView)
+        addSubview(archiveView)
     }
     
     func setUpConstraints(){
-        customTaskView.pin(to: self)
-    }
-    
-    func manageCell(){
-        guard let task else { return }
-        customTaskView.task = task
+        archiveView.pin(to: self)
     }
 
 }

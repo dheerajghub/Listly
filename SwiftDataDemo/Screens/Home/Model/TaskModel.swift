@@ -1,5 +1,5 @@
 //
-//  HomeModel.swift
+//  TaskModel.swift
 //  SwiftDataDemo
 //
 //  Created by Dheeraj Kumar Sharma on 17/09/23.
@@ -14,24 +14,30 @@ enum TaskStatus: Int {
 }
 
 @Model
-class HomeModel {
+class TaskModel {
     
     @Attribute(.unique) var id: String
     var taskName: String?
     var timestamp: Date?
-    var taskStatus: Int?
+    var taskStatus: Int
     var orderNum: Int?
+    var isArchived: Bool
+    var isSelectedForEditing: Bool
     
     init(id: String = UUID().uuidString,
          taskName: String? = nil,
          timestamp: Date? = Date(),
-         taskStatus: Int? = 0,
-         orderNum: Int? = 1
+         taskStatus: Int = 0,
+         orderNum: Int? = 1,
+         isArchived: Bool = false,
+         isSelectedForEditing: Bool = false
     ) {
         self.id = id
         self.taskName = taskName
         self.timestamp = timestamp
         self.taskStatus = taskStatus
         self.orderNum = orderNum
+        self.isArchived = isArchived
+        self.isSelectedForEditing = isSelectedForEditing
     }
 }

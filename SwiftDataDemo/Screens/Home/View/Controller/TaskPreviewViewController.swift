@@ -11,7 +11,7 @@ class TaskPreviewViewController: UIViewController {
 
     // MARK: PROPERTIES -
     
-    var task: HomeModel? {
+    var task: TaskModel? {
         didSet {
             manageCell()
         }

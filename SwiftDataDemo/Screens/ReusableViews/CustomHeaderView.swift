@@ -20,7 +20,9 @@ class CustomHeaderView: UIView {
         return label
     }()
     
-    let actionStackView: UIStackView = {
+    // Leading action button
+    
+    let leadingActionStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fillEqually
@@ -29,11 +31,36 @@ class CustomHeaderView: UIView {
         return stackView
     }()
     
-    let actionButton: UIButton = {
+    let leadingActionButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tapFeedback()
+        button.isHidden = true
         return button
     }()
+    
+    //:
+    
+    // Trailing action button
+    
+    let trailingActionStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8
+        stackView.axis = .horizontal
+        return stackView
+    }()
+    
+    let trailingActionButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tapFeedback()
+        button.isHidden = true
+        return button
+    }()
+    
+    //:
     
     let dividerView: UIView = {
         let view = UIView()
@@ -60,8 +87,11 @@ class CustomHeaderView: UIView {
     func setupViews(){
         addSubview(headerTitle)
         
-        addSubview(actionStackView)
-        actionStackView.addArrangedSubview(actionButton)
+        addSubview(trailingActionStackView)
+        trailingActionStackView.addArrangedSubview(trailingActionButton)
+        
+        addSubview(leadingActionStackView)
+        leadingActionStackView.addArrangedSubview(leadingActionButton)
         
         addSubview(dividerView)
     }
@@ -71,12 +101,20 @@ class CustomHeaderView: UIView {
             headerTitle.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             headerTitle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            actionStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            actionStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            actionStackView.heightAnchor.constraint(equalToConstant: 45),
+            leadingActionStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            leadingActionStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            leadingActionStackView.heightAnchor.constraint(equalToConstant: 40),
             
-            actionButton.heightAnchor.constraint(equalToConstant: 35),
-            actionButton.widthAnchor.constraint(equalToConstant: 35),
+            leadingActionButton.heightAnchor.constraint(equalToConstant: 40),
+            leadingActionButton.widthAnchor.constraint(equalToConstant: 40),
+            
+            trailingActionStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            trailingActionStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            trailingActionStackView.heightAnchor.constraint(equalToConstant: 40),
+            
+            trailingActionButton.heightAnchor.constraint(equalToConstant: 40),
+            trailingActionButton.widthAnchor.constraint(equalToConstant: 40),
+            
             
             dividerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             dividerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),

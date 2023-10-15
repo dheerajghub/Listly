@@ -32,11 +32,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 let task = homeViewModel.tasks[indexPath.row]
                 if task.taskStatus == 1 {
                     homeViewModel.updateTask(task: task, taskStatus: 0)
-                    self.taskTableView.reloadRows(at: [indexPath], with: .fade)
                 } else {
                     homeViewModel.updateTask(task: task, taskStatus: 1)
-                    self.taskTableView.reloadRows(at: [indexPath], with: .fade)
                 }
+                self.taskTableView.reloadRows(at: [indexPath], with: .fade)
             }
         }
     }
@@ -77,8 +76,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             actionProvider: { _ in
                 
                 let editTask = UIAction(
-                    title: "Edit Task",
-                    image: UIImage(named: "ic_edit_orig"),
+                    title: "Edit",
+                    image: UIImage(named: "ic_edit_menu"),
                     identifier: nil
                 ) { _ in
                     
@@ -98,8 +97,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 
                 let removeTask = UIAction(
-                    title: "Delete task",
-                    image: UIImage(named: "ic_trash_orig"),
+                    title: "Delete",
+                    image: UIImage(named: "ic_trash_menu"),
                     identifier: nil,
                     attributes: .destructive
                 ) { _ in
@@ -116,9 +115,41 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     
                 }
                 
+                
+                let archiveTask = UIAction(
+                    title: "Archive",
+                    image: UIImage(named: "ic_archiv_menu")
+                ) { _ in
+                    // archive the task
+                    self.homeViewModel.updateTask(task: task, isArchived: true)
+                    
+                    // animate archive button
+                    
+                    UIView.animate(withDuration: 0.5, delay: 0.4, usingSpringWithDamping: 0.7, initialSpringVelocity: 1) {
+                        
+                        self.headerView.trailingActionButton.transform = .init(scaleX: 1.1, y: 1.1)
+                        self.headerView.trailingActionButton.backgroundColor = UIColor.colorWithHex(color: "#FFB100")
+                        self.headerView.trailingActionButton.imageView?.tintColor = .white
+                        
+                    } completion: { finished in
+                        UIView.animate(withDuration: 0.3) {
+                            self.headerView.trailingActionButton.transform = .identity
+                            self.headerView.trailingActionButton.backgroundColor = .clear
+                            self.headerView.trailingActionButton.imageView?.tintColor = .black
+                        }
+                    }
+                    
+                    //:
+                    
+                    self.homeViewModel.tasks.removeAll()
+                    self.taskTableView.reloadData()
+                    self.fetchData()
+                }
+                
                 return UIMenu(
                     title: "Task Actions",
-                    children: [editTask, removeTask]
+                    /// if task  completed, we cannot archive that task
+                    children: task.taskStatus == 0 ? [editTask, archiveTask, removeTask] : [editTask, removeTask]
                 )
             })
     }

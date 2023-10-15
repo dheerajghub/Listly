@@ -11,7 +11,7 @@ class HomeViewController: UIViewController {
 
     // MARK: PROPERTIES -
     
-    var homeViewModel = HomeViewModel()
+    var homeViewModel = TaskViewModel()
     
     lazy var headerView: CustomHeaderView = {
         let view = CustomHeaderView()
@@ -19,7 +19,14 @@ class HomeViewController: UIViewController {
         
         view.headerTitle.text = "My Task"
         view.headerTitle.font = .systemFont(ofSize: 18, weight: .semibold)
-        view.actionButton.isHidden = true
+        
+        let actionButton = view.trailingActionButton
+        actionButton.isHidden = false
+        actionButton.setImage(UIImage(named: "ic_archiv")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        actionButton.imageView?.tintColor = .black
+        actionButton.addTarget(self, action: #selector(archivTapped), for: .touchUpInside)
+        actionButton.backgroundColor = .clear
+        actionButton.layer.cornerRadius = 20
         
         return view
     }()
@@ -44,7 +51,7 @@ class HomeViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .black
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = 25
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         button.imageView?.tintColor = .white
         button.setTitle(" Add Task", for: .normal)
@@ -52,7 +59,9 @@ class HomeViewController: UIViewController {
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
         button.layer.cornerCurve = .continuous
         button.addTarget(self, action: #selector(addTask), for: .touchUpInside)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         button.tapFeedback()
+        button.dropShadow()
         return button
     }()
     
@@ -76,6 +85,7 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
         fetchData()
     }
     
@@ -101,15 +111,14 @@ class HomeViewController: UIViewController {
             taskTableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             taskTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            addTaskButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            addTaskButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             addTaskButton.heightAnchor.constraint(equalToConstant: 50),
+            addTaskButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             addTaskButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             
             defaultView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             defaultView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             defaultView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            defaultView.topAnchor.constraint(equalTo: view.topAnchor)
+            defaultView.topAnchor.constraint(equalTo: headerView.bottomAnchor)
         ])
     }
     
@@ -129,7 +138,9 @@ class HomeViewController: UIViewController {
                         defaultView.isHidden = true
                         addTaskButton.isHidden = false
                     }
-                    self.taskTableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.taskTableView.reloadData()
+                    }
                     
                 case let .failure(error):
                     print(error)
@@ -154,11 +165,22 @@ class HomeViewController: UIViewController {
             guard let self else { return }
             self.fetchData()
             // scroll to very bottom
-            let index = IndexPath(row: homeViewModel.tasks.count - 1, section: 0)
-            self.taskTableView.scrollToRow(at: index, at: .bottom, animated: true)
+            let taskCount = homeViewModel.tasks.count
+            if  taskCount > 0 {
+                let index = IndexPath(row: taskCount - 1, section: 0)
+                self.taskTableView.scrollToRow(at: index, at: .bottom, animated: true)
+            }
         }
         
         self.present(taskController, animated: true)
+        
+    }
+    
+    @objc func archivTapped(){
+        
+        let controller = ArchivedTaskViewController()
+        controller.taskViewModel = homeViewModel
+        self.navigationController?.pushViewController(controller, animated: true)
         
     }
 
