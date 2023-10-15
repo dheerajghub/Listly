@@ -15,3 +15,9 @@ You'll be able to learn how to perform basic CRUD operations and make data persi
 | ------------- | ------------- |
 | <img src="https://imgur.com/jRL8zJa.png" height="500">  | <img src="https://imgur.com/UO5OrEQ.png" height="500">  |
 
+
+### Do you like Listly? Go Spread the word!
+If you like this project, share it with your friends, Just give it a star ⭐️
+
+### Credits
+**©** **Dheeraj kumar sharma** - *2023*
