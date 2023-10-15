@@ -9,11 +9,11 @@ You'll be able to learn how to perform basic CRUD operations and make data persi
 
 | Screen 1  | Screen 2 | Screen 3 |
 | ------------- | ------------- | ------------- |
-| <img src="https://imgur.com/MZEDBSK.png" height="500">  | <img src="https://imgur.com/jwKhZHV.png" height="500">  | <img src="https://imgur.com/RISb6cj.png" height="500"> |
+| <img src="https://imgur.com/MZEDBSK.png">  | <img src="https://imgur.com/jwKhZHV.png" >  | <img src="https://imgur.com/RISb6cj.png"> |
 
 | Screen 4  | Screen 5 |
 | ------------- | ------------- |
-| <img src="https://imgur.com/jRL8zJa.png" height="500">  | <img src="https://imgur.com/UO5OrEQ.png" height="500">  |
+| <img src="https://imgur.com/jRL8zJa.png">  | <img src="https://imgur.com/UO5OrEQ.png">  |
 
 
 ### Do you like Listly? Go Spread the word!
