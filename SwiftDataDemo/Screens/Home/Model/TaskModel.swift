@@ -23,6 +23,7 @@ class TaskModel {
     var orderNum: Int?
     var isArchived: Bool
     var isSelectedForEditing: Bool
+    var dueOn: Date?
     
     init(id: String = UUID().uuidString,
          taskName: String? = nil,
@@ -30,7 +31,8 @@ class TaskModel {
          taskStatus: Int = 0,
          orderNum: Int? = 1,
          isArchived: Bool = false,
-         isSelectedForEditing: Bool = false
+         isSelectedForEditing: Bool = false,
+         dueOn: Date? = nil
     ) {
         self.id = id
         self.taskName = taskName
@@ -39,5 +41,6 @@ class TaskModel {
         self.orderNum = orderNum
         self.isArchived = isArchived
         self.isSelectedForEditing = isSelectedForEditing
+        self.dueOn = dueOn
     }
 }

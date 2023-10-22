@@ -20,12 +20,12 @@ extension ArchivedTaskViewController: UITableViewDelegate, UITableViewDataSource
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArchivedTaskTableViewCell", for: indexPath) as! ArchivedTaskTableViewCell
         cell.selectionStyle = .none
+        
         if taskViewModel.tasks.count > 0, let task = taskViewModel.tasks[safe: indexPath.row] {
             cell.task = task
+            cell.forEdit = archiveViewModel.isEditing
+            cell.isSelected = task.isSelectedForEditing
         }
-        
-        cell.forEdit = archiveViewModel.isEditing
-        cell.isSelected = taskViewModel.tasks[indexPath.row].isSelectedForEditing
         
         return cell
     }

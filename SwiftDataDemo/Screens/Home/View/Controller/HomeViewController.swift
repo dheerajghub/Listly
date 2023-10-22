@@ -185,3 +185,9 @@ class HomeViewController: UIViewController {
     }
 
 }
+
+@available(iOS 17.0, *)
+#Preview {
+    let controller = HomeViewController()
+    return controller
+}

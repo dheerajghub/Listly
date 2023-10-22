@@ -104,7 +104,7 @@ class TaskView: UIView {
             
         ])
         
-        taskLabelBottomConstraints = taskLabel.bottomAnchor.constraint(equalTo: cardCoverView.bottomAnchor, constant: -10) // 35
+        taskLabelBottomConstraints = taskLabel.bottomAnchor.constraint(equalTo: cardCoverView.bottomAnchor, constant: -10) // -35
         taskLabelBottomConstraints?.isActive = true
     }
     
@@ -113,20 +113,22 @@ class TaskView: UIView {
         guard let task else { return }
         
         // 0 is for todo tasks
-        let taskStatus = TaskStatus(rawValue: task.taskStatus ?? 0)
-//        taskLabel.text = task.taskName
+        let taskStatus = TaskStatus(rawValue: task.taskStatus)
         
-        // formatted date string
-        let timestamp = task.timestamp
-        let dayDifference = timestamp?.dayDifference() ?? "" // Yesterday, Today, Tomorrow
-        let time = timestamp?.toString(format: "hh.mm a") ?? ""
-        timeLabel.text = dayDifference + " " + time
+        if let dueOn = task.dueOn {
+            // formatted date string
+            timeLabel.isHidden = false
+            timeLabel.text = dueOn.dueOnFormat()
+            taskLabelBottomConstraints?.constant = -32
+        } else {
+            timeLabel.isHidden = true
+            taskLabelBottomConstraints?.constant = -10
+        }
         
         // selection UI
         let taskSelected = (taskStatus == .todo) ? false : true
         manageSelection(isSelected: taskSelected)
-    
-//        taskLabelBottomConstraints?.constant = -12
+
     }
     
     func manageSelection(isSelected: Bool) {

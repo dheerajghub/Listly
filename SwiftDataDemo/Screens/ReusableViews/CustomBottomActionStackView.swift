@@ -1,5 +1,5 @@
 //
-//  CustomBottomArchiveActionView.swift
+//  CustomBottomActionStackView.swift
 //  SwiftDataDemo
 //
 //  Created by Dheeraj Kumar Sharma on 15/10/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomBottomArchiveActionView: UIView {
+class CustomBottomActionStackView: UIView {
 
     // MARK: PROPERTIES -
     
@@ -33,12 +33,9 @@ class CustomBottomArchiveActionView: UIView {
         return stackView
     }()
     
-    lazy var unarchiveButton: UIButton = {
+    lazy var actionButton1: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "ic_unarchive")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        button.imageView?.tintColor = .white
-        button.setTitle("  Unarchive", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .black
@@ -47,12 +44,9 @@ class CustomBottomArchiveActionView: UIView {
         return button
     }()
     
-    lazy var cancelButton: UIButton = {
+    lazy var actionButton2: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "ic_close")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        button.imageView?.tintColor = .white
-        button.setTitle("  Cancel", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = Colors.appRed
@@ -81,8 +75,8 @@ class CustomBottomArchiveActionView: UIView {
         addSubview(actionView)
         actionView.addSubview(actionStackView)
         
-        actionStackView.addArrangedSubview(unarchiveButton)
-        actionStackView.addArrangedSubview(cancelButton)
+        actionStackView.addArrangedSubview(actionButton1)
+        actionStackView.addArrangedSubview(actionButton2)
     }
     
     func setUpConstraints(){

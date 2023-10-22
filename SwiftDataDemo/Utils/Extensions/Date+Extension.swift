@@ -23,4 +23,17 @@ extension Date {
         else if calendar.isDateInTomorrow(self) { return "Tomorrow" }
         else { return toString(format: "dd MMM") + "," }
     }
+    
+    func dueOnFormat() -> String {
+        
+        let calendar = Calendar.current
+        if calendar.isDateInToday(self) {
+            return "Today, " + self.toString(format: "hh:mm a")
+        } else if calendar.isDateInTomorrow(self) {
+            return "Tomorrow, " + self.toString(format: "hh:mm a")
+        } else {
+            return self.toString(format: "EEEE, MMM d, yyyy, hh:mm a")
+        }
+        
+    }
 }

@@ -78,12 +78,24 @@ class ArchivedTaskViewController: UIViewController {
         return button
     }()
     
-    lazy var bottomActionView: CustomBottomArchiveActionView = {
-        let view = CustomBottomArchiveActionView()
+    lazy var bottomActionView: CustomBottomActionStackView = {
+        let view = CustomBottomActionStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        view.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-        view.unarchiveButton.addTarget(self, action: #selector(unarchiveButtonTapped), for: .touchUpInside)
+        // unarchive action button
+        let unarchiveButton = view.actionButton1
+        unarchiveButton.setImage(UIImage(named: "ic_unarchive")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        unarchiveButton.imageView?.tintColor = .white
+        unarchiveButton.setTitle("  Unarchive", for: .normal)
+        unarchiveButton.addTarget(self, action: #selector(unarchiveButtonTapped), for: .touchUpInside)
+        
+        
+        // unarchive action button
+        let cancelButton = view.actionButton2
+        cancelButton.setImage(UIImage(named: "ic_close")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        cancelButton.imageView?.tintColor = .white
+        cancelButton.setTitle("  Cancel", for: .normal)
+        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         
         return view
     }()

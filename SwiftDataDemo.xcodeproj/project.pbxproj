@@ -19,7 +19,6 @@
 		443D36292ADAB41900116378 /* ArchiveTaskViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D36282ADAB41900116378 /* ArchiveTaskViewController+Delegate.swift */; };
 		443D362B2ADAD33A00116378 /* ArchiveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D362A2ADAD33A00116378 /* ArchiveViewModel.swift */; };
 		44501CDE2ADBA490000EB079 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44501CDD2ADBA490000EB079 /* Array+Extension.swift */; };
-		44501CE02ADBEB60000EB079 /* CustomBottomArchiveActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44501CDF2ADBEB60000EB079 /* CustomBottomArchiveActionView.swift */; };
 		4463D84C2AB5DC45006B0D93 /* DataPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D84B2AB5DC45006B0D93 /* DataPersistenceService.swift */; };
 		4463D8732AB75996006B0D93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D86E2AB75996006B0D93 /* AppDelegate.swift */; };
 		4463D8752AB75996006B0D93 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D8702AB75996006B0D93 /* SceneDelegate.swift */; };
@@ -40,6 +39,10 @@
 		4463D8A62ABECF24006B0D93 /* HomeViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D8A52ABECF24006B0D93 /* HomeViewController+Delegate.swift */; };
 		4463D8A92ABEDA0C006B0D93 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D8A82ABEDA0C006B0D93 /* AppConstants.swift */; };
 		4463D8AB2ABFDD69006B0D93 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463D8AA2ABFDD69006B0D93 /* Date+Extension.swift */; };
+		44A40B302AE3DA0300D16A3F /* TaskActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A40B2F2AE3DA0300D16A3F /* TaskActionView.swift */; };
+		44A40B322AE3DB3A00D16A3F /* TaskViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A40B312AE3DB3A00D16A3F /* TaskViewController+Delegate.swift */; };
+		44A40B342AE3ED4000D16A3F /* DateTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A40B332AE3ED4000D16A3F /* DateTimePickerViewController.swift */; };
+		44B13C392AE4C5C600F40BF7 /* CustomBottomActionStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B13C382AE4C5C600F40BF7 /* CustomBottomActionStackView.swift */; };
 		44F304F82AC7C04800B38CB0 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F304F72AC7C04800B38CB0 /* UIApplication+Extension.swift */; };
 		44F304FC2AC904CB00B38CB0 /* CustomAlertSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F304FB2AC904CB00B38CB0 /* CustomAlertSheetView.swift */; };
 		44F305022AC9466500B38CB0 /* TaskPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F305012AC9466500B38CB0 /* TaskPreviewViewController.swift */; };
@@ -59,7 +62,6 @@
 		443D36282ADAB41900116378 /* ArchiveTaskViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArchiveTaskViewController+Delegate.swift"; sourceTree = "<group>"; };
 		443D362A2ADAD33A00116378 /* ArchiveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveViewModel.swift; sourceTree = "<group>"; };
 		44501CDD2ADBA490000EB079 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
-		44501CDF2ADBEB60000EB079 /* CustomBottomArchiveActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBottomArchiveActionView.swift; sourceTree = "<group>"; };
 		4463D8312AB5DA7C006B0D93 /* SwiftDataDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDataDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4463D84B2AB5DC45006B0D93 /* DataPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceService.swift; sourceTree = "<group>"; };
 		4463D86E2AB75996006B0D93 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,10 @@
 		4463D8A52ABECF24006B0D93 /* HomeViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+Delegate.swift"; sourceTree = "<group>"; };
 		4463D8A82ABEDA0C006B0D93 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		4463D8AA2ABFDD69006B0D93 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		44A40B2F2AE3DA0300D16A3F /* TaskActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskActionView.swift; sourceTree = "<group>"; };
+		44A40B312AE3DB3A00D16A3F /* TaskViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskViewController+Delegate.swift"; sourceTree = "<group>"; };
+		44A40B332AE3ED4000D16A3F /* DateTimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePickerViewController.swift; sourceTree = "<group>"; };
+		44B13C382AE4C5C600F40BF7 /* CustomBottomActionStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBottomActionStackView.swift; sourceTree = "<group>"; };
 		44F304F72AC7C04800B38CB0 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		44F304FB2AC904CB00B38CB0 /* CustomAlertSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertSheetView.swift; sourceTree = "<group>"; };
 		44F305012AC9466500B38CB0 /* TaskPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPreviewViewController.swift; sourceTree = "<group>"; };
@@ -133,7 +139,6 @@
 			children = (
 				443D36242ADAB35500116378 /* ArchiveTaskView.swift */,
 				443D36262ADAB36F00116378 /* ArchivedTaskTableViewCell.swift */,
-				44501CDF2ADBEB60000EB079 /* CustomBottomArchiveActionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 		4463D88A2AB76677006B0D93 /* ReusableViews */ = {
 			isa = PBXGroup;
 			children = (
+				44B13C382AE4C5C600F40BF7 /* CustomBottomActionStackView.swift */,
 				4436FBF32AC066AA00A34AD7 /* CustomAlertView */,
 				4463D8902AB76914006B0D93 /* FormViews */,
 				4463D88B2AB766D2006B0D93 /* CustomHeaderView.swift */,
@@ -290,7 +296,10 @@
 		4463D8A42ABECEED006B0D93 /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				44A40B2E2AE3D9E400D16A3F /* View */,
 				4463D88E2AB76887006B0D93 /* TasksViewController.swift */,
+				44A40B312AE3DB3A00D16A3F /* TaskViewController+Delegate.swift */,
+				44A40B332AE3ED4000D16A3F /* DateTimePickerViewController.swift */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -302,6 +311,14 @@
 				4436FBEF2AC0636800A34AD7 /* Helper.swift */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		44A40B2E2AE3D9E400D16A3F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				44A40B2F2AE3DA0300D16A3F /* TaskActionView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,8 +392,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				443D362B2ADAD33A00116378 /* ArchiveViewModel.swift in Sources */,
+				44B13C392AE4C5C600F40BF7 /* CustomBottomActionStackView.swift in Sources */,
 				443D36272ADAB36F00116378 /* ArchivedTaskTableViewCell.swift in Sources */,
 				4463D8732AB75996006B0D93 /* AppDelegate.swift in Sources */,
+				44A40B342AE3ED4000D16A3F /* DateTimePickerViewController.swift in Sources */,
 				4463D8A92ABEDA0C006B0D93 /* AppConstants.swift in Sources */,
 				4463D8922AB76933006B0D93 /* FormTextView.swift in Sources */,
 				4463D8A12ABEBFFC006B0D93 /* TaskTableViewCell.swift in Sources */,
@@ -393,9 +412,11 @@
 				4436FBEE2AC006C400A34AD7 /* UIViewController+Extension.swift in Sources */,
 				4463D88F2AB76887006B0D93 /* TasksViewController.swift in Sources */,
 				4463D8872AB75C8B006B0D93 /* TaskModel.swift in Sources */,
+				44A40B302AE3DA0300D16A3F /* TaskActionView.swift in Sources */,
 				4436FBF52AC066CA00A34AD7 /* CustomActionSheetView.swift in Sources */,
 				4463D8752AB75996006B0D93 /* SceneDelegate.swift in Sources */,
 				443D36252ADAB35500116378 /* ArchiveTaskView.swift in Sources */,
+				44A40B322AE3DB3A00D16A3F /* TaskViewController+Delegate.swift in Sources */,
 				4463D8852AB75C81006B0D93 /* TaskViewModel.swift in Sources */,
 				4463D8892AB75C99006B0D93 /* HomeViewController.swift in Sources */,
 				4463D89C2AB77041006B0D93 /* UIColor+Extension.swift in Sources */,
@@ -406,7 +427,6 @@
 				44F305022AC9466500B38CB0 /* TaskPreviewViewController.swift in Sources */,
 				4463D84C2AB5DC45006B0D93 /* DataPersistenceService.swift in Sources */,
 				443D36292ADAB41900116378 /* ArchiveTaskViewController+Delegate.swift in Sources */,
-				44501CE02ADBEB60000EB079 /* CustomBottomArchiveActionView.swift in Sources */,
 				4463D8AB2ABFDD69006B0D93 /* Date+Extension.swift in Sources */,
 				44F304FC2AC904CB00B38CB0 /* CustomAlertSheetView.swift in Sources */,
 			);
@@ -555,6 +575,7 @@
 				DEVELOPMENT_TEAM = 9W5STY688V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftDataDemo/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Listly;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -586,6 +607,7 @@
 				DEVELOPMENT_TEAM = 9W5STY688V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftDataDemo/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Listly;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
